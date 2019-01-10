@@ -1,0 +1,42 @@
+.parent-divv {
+  /* remove when done */
+  /* border: 1px blueviolet dotted; */
+  background-color: bisque;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 95vh;
+  width: 100%;
+  font-family: Roboto, sans-serif;
+}
+
+.vert-alignn {
+  /* border: 3px solid green; */
+  height: 400px;
+  width: 70%;
+  margin-left: 15%;
+  display: flex;
+  flex-direction: column;
+}
+.vert-alignn h3,
+.vert-alignn h4 {
+  text-align: center;
+}
+.align-btn {
+  text-align: center;
+}
+
+.input-row {
+  height: 40px;
+  display: flex;
+  margin-left: 50px;
+}
+
+.input-row p {
+  width: 40%;
+  padding-top: 10px;
+}
+.input-row input {
+  width: 60%;
+  margin-left: 5px;
+}

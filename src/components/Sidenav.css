@@ -1,0 +1,25 @@
+/* fixed side-nav */
+.side-nav {
+  display: block;
+  width: 200px;
+  height: 290px;
+  position: fixed;
+  top: 50%;
+  margin-top: -145px;
+  left: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* remove when done */
+  /* border: 1px solid pink; */
+}
+
+.side-nav span {
+  color: yellow;
+}
+.side-nav a {
+  color: white;
+}
+.side-nav:hover a {
+  color: #f0f0f0;
+}

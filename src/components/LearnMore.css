@@ -1,0 +1,60 @@
+.LearnMore-body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  color: white;
+  /* background-image: url(../Assets/erin-simmons-382348-unsplash.jpg); */
+  background-image: url(../Assets/randall-ruiz-272502-unsplash.jpg);
+  background-repeat: no-repeat, no-repeat;
+  background-position: center;
+  background-size: cover;
+  /* height: 100%; */
+  /* border-top is needed to over-ride the extra white space on top */
+  border-top: lightseagreen 1px solid;
+}
+
+.LearnMore-title {
+  text-align: center;
+}
+
+.infobox {
+  display: flex;
+  flex-direction: column;
+  /* remove when done */
+  /* border: green 1px solid; */
+}
+
+.infosection {
+  /* remove when done */
+  /* border: red 1px solid; */
+  height: 100%;
+  width: 80%;
+  margin-left: 10vw;
+  /* lightblue background to make the font stick out */
+  background-color: rgba(63, 129, 250, 0.4);
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2);
+}
+.infosection span {
+  display: flex;
+  margin-left: 20px;
+}
+.infosection a {
+  color: yellow;
+  font-size: 20px;
+  /* bold is not necessary */
+  /* font-weight: bold; */
+  margin-left: 20px;
+}
+.infosection a:hover {
+  color: orange;
+}
+
+.ReturnToAppBtn {
+  text-align: center;
+}
+.ReturnToAppBtn button {
+  height: 40px;
+  width: 250px;
+  font-weight: bold;
+}

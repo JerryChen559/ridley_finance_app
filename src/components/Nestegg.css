@@ -1,0 +1,124 @@
+/* entire income statement page */
+.nestegg {
+  width: 100%;
+  height: 210vh;
+  background-image: linear-gradient(0deg, #0f2027, #2c5364);
+  color: white;
+}
+
+/* header - title of the page */
+.nestegg-header {
+  width: 100%;
+  height: 10vh;
+  color: white;
+  font-family: Arial;
+  font-size: 20px;
+  text-align: center;
+  /* remove when done */
+  /* border: orange 1px solid; */
+  padding-top: 10vh;
+}
+
+.nestegg-body {
+  /* remove when done */
+  /* border: red 1px solid; */
+  /* width: 70%; */
+  height: 1000px;
+  float: right;
+  padding-top: 12vh;
+  padding-right: 20px;
+  margin-right: 15vh;
+  display: flex;
+}
+
+/* deposits portion */
+/* .nestegg-left {
+  remove when done
+  border: black 1px solid;
+} */
+
+.emergencyfund {
+  /* remove when done */
+  /* border: 1px lime dotted; */
+  /* height: 50%; */
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+}
+.emergencyfund input {
+  margin-left: 4%;
+}
+
+.retirementfund {
+  /* remove when done */
+  /* border: 1px green dotted; */
+  height: 50%;
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+}
+.retirementfund input {
+  margin-left: 4%;
+}
+
+.nestegg-add {
+  width: 100px;
+  background-color: green;
+  border: none;
+  height: 40px;
+  border-radius: 30px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.nestegg-add:hover {
+  background-color: rgba(0, 128, 0, 0.8);
+  color: white;
+  cursor: pointer;
+}
+
+.depositlook {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.delButton {
+  width: 80px;
+  background-color: red;
+  border: none;
+  height: 30px;
+  border-radius: 30px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.delButton:hover {
+  background-color: rgba(255, 0, 0, 0.88);
+  color: white;
+  cursor: pointer;
+}
+
+/* garden portion */
+.nestegg-right {
+  /* remove when done */
+  /* border: black 1px solid; */
+  padding-top: 50px;
+}
+
+.garden {
+  /* remove when done */
+  /* border: 1px lightskyblue dotted; */
+  width: 30vw;
+  height: 80%;
+  float: right;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.nestegg-right a {
+  color: orange;
+}
+.nestegg-right a:hover {
+  color: yellow;
+}
