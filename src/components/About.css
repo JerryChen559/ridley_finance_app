@@ -1,0 +1,35 @@
+/* About section */
+
+.aboutdisplay {
+  width: 100%;
+  height: 120vh;
+  color: white;
+  font-weight: 600;
+
+  background-image: url(https://sqy7rm.media.zestyio.com/branches.svg),
+    linear-gradient(65deg, rgb(241, 39, 17), rgb(245, 175, 25));
+  background-repeat: no-repeat, no-repeat;
+  background-position: left;
+}
+
+.aboutdisplay h1 {
+  margin: 0;
+}
+
+.aboutdisplay a {
+  color: #f9ff00;
+  text-align: center;
+}
+.aboutdisplay a:hover {
+  color: orange;
+}
+
+/* About section words */
+.aboutwords h1 {
+  text-align: center;
+}
+
+.aboutwords p {
+  margin-left: 10px;
+  /* text-align: center; */
+}

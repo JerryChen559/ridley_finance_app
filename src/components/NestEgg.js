@@ -250,16 +250,10 @@ class NestEgg extends Component {
 
     return (
       <div className="nestegg">
-        {/* <div className="navbar"> */}
         <Navbar />
-        {/* </div> */}
-        {/* <Sidenav /> */}
+
         <div className="nestegg-header">
-          <h1>Step 2: Build a Nest Egg</h1>
-          {/* <h5>
-            (Take the net income amount and distribute it across emergency funds
-            and retirement)
-          </h5> */}
+          <h2>Step 2: Build a Nest Egg</h2>
         </div>
 
         <div className="nestegg-body">
@@ -313,30 +307,17 @@ class NestEgg extends Component {
             </div>
           </div>
           <div className="nestegg-right">
-            <p style={{ color: "khaki" }}>
-              <strong>Garden of Wealth</strong>
-            </p>
+            <h2 style={{ color: "khaki" }}>Garden of Wealth</h2>
             <div className="garden">
               {/* {garden} */}
               {this.garden(this.state.alldeposits.length)}
             </div>
-            <h3>
-              >>> Onto step 3: Plan your{" "}
-              <Link to="/retirementplan"> retirement!</Link>
-            </h3>
           </div>
+          <h2 className="step2">
+            >>> Onto step 3: Plan your{" "}
+            <Link to="/retirementplan"> retirement!</Link>
+          </h2>
         </div>
-        {/* 
-        I can add this to the bottom.
-        <h3>
-          A nest egg is a sum of money that has been collected over time with a
-          purpose of using spending it at a later date. Let's build a couple of
-          nest eggs!{" "}
-        </h3>
-        <h3>
-          We can take the net income amount from the income statement and
-          distribute it across emergency funds and retirement.
-        </h3> */}
       </div>
     );
   }

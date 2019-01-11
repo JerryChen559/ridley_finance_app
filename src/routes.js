@@ -10,6 +10,7 @@ import Wizard2 from "./components/Wizard2";
 import Wizard3 from "./components/Wizard3";
 import Wizard4 from "./components/Wizard4";
 import IncomeStatement from "./components/IncomeStatement";
+import About from "./components/About";
 import LearnMore from "./components/LearnMore";
 // using auth to take care of login/signup
 // import LogIn from "./components/LogIn";
@@ -27,6 +28,7 @@ export default (
     <Route path="/wizardthree" component={Wizard3} />
     <Route path="/wizardfour" component={Wizard4} />
     <Route path="/incomestatement" component={IncomeStatement} />
+    <Route path="/about" component={About} />
     <Route path="/learnmore" component={LearnMore} />
     {/* // using auth to take care of login/signup */}
     {/* <Route path="/login" component={LogIn} /> */}

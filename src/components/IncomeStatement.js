@@ -5,12 +5,28 @@ import { getUser } from "../redux/reducers/profileReducer";
 import axios from "axios";
 import "./IncomeStatement.css";
 
-// import AppBar from "@material-ui/core/AppBar";
 import { Doughnut } from "react-chartjs-2";
 import Navbar from "./Navbar";
-import Sidenav from "./Sidenav";
 
-//TODO update $ figures. toLocalString()
+import { withStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+
+const styles = {
+  card: {
+    marginTop: "10px",
+    width: "44%"
+  },
+  title: {
+    fontSize: 14
+  },
+  pos: {
+    marginBottom: 12
+  }
+};
+
 class IncomeStatement extends Component {
   constructor(props) {
     super(props);
@@ -189,15 +205,13 @@ class IncomeStatement extends Component {
       ]
     };
 
+    const { classes } = this.props;
     return (
       <div>
         <Navbar />
         <div className="incomestatement">
-          {/* <Sidenav /> */}
-
           <div className="statement-header">
-            <h1>Welcome to Step 1!</h1>
-            {/* <h5>(calculate net income by updating your info)</h5> */}
+            <h2>Step 1: Fill Out Income Statement</h2>
           </div>
 
           <div className="statement-body">
@@ -308,14 +322,18 @@ class IncomeStatement extends Component {
               </div>
             </div>
 
-            <h3 style={{ marginTop: "10px" }}>
+            {/* <h3
+              style={{ marginTop: "10px" }}
+            >
               <strong style={{ color: "khaki" }}>Summary:</strong> With all
               expenses paid, you are left with{" "}
               <strong>{(this.state.monthlynetpercent * 100).toFixed(2)}</strong>
               % of your net income.
             </h3>
 
-            <h3 style={{ marginTop: "10px" }}>
+            <h3
+              style={{ marginTop: "10px" }}
+            >
               <strong style={{ color: "khaki" }}>Email:</strong> Send yourself a
               summary of your income statement:
               <input
@@ -326,20 +344,73 @@ class IncomeStatement extends Component {
               <button onClick={() => this.sendIncomeStatement()}>
                 <strong>Email</strong>
               </button>
-            </h3>
+            </h3> */}
           </div>
+
+          <div className="cards">
+            {/* Summary Card */}
+            <Card className={classes.card}>
+              <CardContent>
+                <Typography variant="h5" component="h2">
+                  Summary
+                </Typography>
+
+                <Typography component="p">
+                  <h3>
+                    With all expenses paid, you are left with{" "}
+                    {(this.state.monthlynetpercent * 100).toFixed(2)}% of your
+                    net income.
+                  </h3>
+                </Typography>
+              </CardContent>
+            </Card>
+
+            {/* Email Card */}
+            <Card className={classes.card}>
+              <CardContent>
+                <Typography variant="h5" component="h2">
+                  Email
+                </Typography>
+
+                <Typography component="p">
+                  <h3>Send yourself a summary of your income statement:</h3>
+                </Typography>
+
+                <input
+                  style={{ margin: "0px" }}
+                  type="text"
+                  placeholder="email"
+                  onChange={e => this.handleInput("email", e.target.value)}
+                />
+
+                <Button
+                  style={{ marginLeft: "5%" }}
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                  onClick={() => this.sendIncomeStatement()}
+                >
+                  Send
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
           <div className="graph-body">
             <div>
-              <h2 style={{ color: "#333" }}>Breakdown of expenses</h2>
+              <h2 style={{ color: "#333", textAlign: "center" }}>
+                Breakdown of expenses
+              </h2>
               <Doughnut
                 data={data}
                 style={{ width: "auto", fontSize: "2em" }}
               />
             </div>
-            <h2 className="step2" style={{ color: "#413bf7" }}>
-              >>> Next step: Set up your <Link to="/nestegg"> nest egg. </Link>
-            </h2>
           </div>
+
+          <h2 className="step2" style={{ color: "#413bf7" }}>
+            >>> Next step: Set up your <Link to="/nestegg"> nest egg. </Link>
+          </h2>
         </div>
       </div>
     );
@@ -351,4 +422,4 @@ const mapStateToProps = state => state;
 export default connect(
   mapStateToProps,
   { getUser }
-)(IncomeStatement);
+)(withStyles(styles)(IncomeStatement));

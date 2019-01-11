@@ -6,7 +6,7 @@ import "./RetirementPlan.css";
 
 import { Bar, Line } from "react-chartjs-2";
 import Navbar from "./Navbar";
-import Sidenav from "./Sidenav";
+// import Sidenav from "./Sidenav";
 
 class RetirementPlan extends Component {
   constructor(props) {
@@ -216,7 +216,7 @@ class RetirementPlan extends Component {
 
         {/* <Sidenav /> */}
         <div className="retire-header">
-          <h1>Step 3: Retirement Plan</h1>
+          <h2>Step 3: Retirement Plan</h2>
           {/* <h5>(Move the slider! Increase savings for early retirement)</h5> */}
         </div>
 
