@@ -21,8 +21,8 @@ import sunflowerthree from "../Assets/garden/sunflowerthree.svg";
 
 import Navbar from "./Navbar";
 import "./Navbar.css";
-import Sidenav from "./Sidenav";
-import "./Sidenav.css";
+// import Sidenav from "./Sidenav";
+// import "./Sidenav.css";
 
 //TODO: flowers are updating on input change.
 // stop it from updating on every key stroke.
@@ -250,10 +250,10 @@ class NestEgg extends Component {
 
     return (
       <div className="nestegg">
-        <div className="navbar">
-          <Navbar />
-        </div>
-        <Sidenav />
+        {/* <div className="navbar"> */}
+        <Navbar />
+        {/* </div> */}
+        {/* <Sidenav /> */}
         <div className="nestegg-header">
           <h1>Step 2: Build a Nest Egg</h1>
           {/* <h5>

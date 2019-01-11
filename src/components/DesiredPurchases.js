@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
 
+import Navbar from "./Navbar";
 import "./DesiredPurchases.css";
 
 class DesiredPurchases extends Component {
@@ -49,8 +50,8 @@ class DesiredPurchases extends Component {
   }
 
   render() {
-    console.log("cardstate", this.state);
-    console.log("cardprops", this.props);
+    // console.log("cardstate", this.state);
+    // console.log("cardprops", this.props);
 
     let orderedCards = this.state.cards.map((card, i) => (
       <div className="card" key={i}>
@@ -89,43 +90,46 @@ class DesiredPurchases extends Component {
     // .sort((a, b) => a.importance - b.importance);
 
     return (
-      <div className="desiredpurchases">
-        <h2 className="step4">Step 4: Desired Purchases</h2>
-        <div className="instructions">
-          <span className="leftside">
-            <p>
-              <strong style={{ color: "yellow" }}>Directions: </strong>Make a
-              list of all the things you want to purchase.
-            </p>
-            <p>Managing your expenses can lead to conscious spending.</p>
-          </span>
-          <span className="rightside">
-            <button className="addcardbtn" onClick={() => this.addCard()}>
-              add new card
-            </button>
-          </span>
-        </div>
-        <div className="cardcontainer">{orderedCards}</div>
-        <h3 className="ReturnToAppBtn">
-          <Link to="/incomestatement">
-            <button>You're done! Go home.</button>
-          </Link>
-        </h3>
+      <div>
+        <Navbar />
+        <div className="desiredpurchases">
+          <h2 className="step4">Step 4: Desired Purchases</h2>
+          <div className="instructions">
+            <span className="leftside">
+              <p>
+                <strong style={{ color: "yellow" }}>Directions: </strong>Make a
+                list of all the things you want to purchase.
+              </p>
+              <p>Managing your expenses can lead to conscious spending.</p>
+            </span>
+            <span className="rightside">
+              <button className="addcardbtn" onClick={() => this.addCard()}>
+                add new card
+              </button>
+            </span>
+          </div>
+          <div className="cardcontainer">{orderedCards}</div>
+          <h3 className="ReturnToAppBtn">
+            <Link to="/incomestatement">
+              <button>You're done! Go home.</button>
+            </Link>
+          </h3>
 
-        <nav className="bottom-nav">
-          <span>
-            Step 1 <Link to="/incomestatement"> Income Statement </Link>
-          </span>
-          <span>
-            Step 2 <Link to="/nestegg"> Nest Egg </Link>
-          </span>
-          <span>
-            Step 3 <Link to="/retirementplan"> Retirement Plan </Link>
-          </span>
-          <span>
-            Step 4 <Link to="/desiredpurchases"> Desired Purchases </Link>
-          </span>
-        </nav>
+          {/* <nav className="bottom-nav">
+            <span>
+              Step 1 <Link to="/incomestatement"> Income Statement </Link>
+            </span>
+            <span>
+              Step 2 <Link to="/nestegg"> Nest Egg </Link>
+            </span>
+            <span>
+              Step 3 <Link to="/retirementplan"> Retirement Plan </Link>
+            </span>
+            <span>
+              Step 4 <Link to="/desiredpurchases"> Desired Purchases </Link>
+            </span>
+          </nav> */}
+        </div>
       </div>
     );
   }

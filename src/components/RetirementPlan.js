@@ -56,8 +56,8 @@ class RetirementPlan extends Component {
   }
 
   render() {
-    console.log("RP state:", this.state);
-    console.log("RP props:", this.props);
+    // console.log("RP state:", this.state);
+    // console.log("RP props:", this.props);
 
     // MATH for FIRE: (Monthly expenses * 12 months * ({yearsleft})) * (1.02**({yearsleft}))
     let yearsleft = 78 - this.state.age;
@@ -106,10 +106,10 @@ class RetirementPlan extends Component {
     let savingsyears =
       (savings / (this.state.monthlyincome * 12 * yearsleft)) * yearsleft;
 
-    console.log("assetyears:", assetyears);
-    console.log("savings:", savings);
-    console.log("savingsyears:", savingsyears);
-    console.log("fire:", fire);
+    // console.log("assetyears:", assetyears);
+    // console.log("savings:", savings);
+    // console.log("savingsyears:", savingsyears);
+    // console.log("fire:", fire);
 
     let yearcount =
       yearsleft - assetyears - savingsyears > 0
@@ -212,11 +212,9 @@ class RetirementPlan extends Component {
 
     return (
       <div className="retire">
-        <div className="navbar">
-          <Navbar />
-        </div>
+        <Navbar />
 
-        <Sidenav />
+        {/* <Sidenav /> */}
         <div className="retire-header">
           <h1>Step 3: Retirement Plan</h1>
           {/* <h5>(Move the slider! Increase savings for early retirement)</h5> */}

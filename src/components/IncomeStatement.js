@@ -5,6 +5,7 @@ import { getUser } from "../redux/reducers/profileReducer";
 import axios from "axios";
 import "./IncomeStatement.css";
 
+// import AppBar from "@material-ui/core/AppBar";
 import { Doughnut } from "react-chartjs-2";
 import Navbar from "./Navbar";
 import Sidenav from "./Sidenav";
@@ -81,6 +82,11 @@ class IncomeStatement extends Component {
     this.setState({ [key]: val });
   }
 
+  // alt method to handle changes
+  // handleChange = input => e => {
+  //   this.setState({[input]: e.target.value})
+  // }
+
   sendIncomeStatement() {
     axios
       .post(`/api/sendIncomeStatement/${this.props.profile.user.auth_id}`, {
@@ -111,8 +117,8 @@ class IncomeStatement extends Component {
   }
 
   render() {
-    console.log("IS state", this.state);
-    console.log("IS props", this.props);
+    // console.log("IS state", this.state);
+    // console.log("IS props", this.props);
 
     // --- data for Doughnut ---
     const data = {
@@ -185,11 +191,9 @@ class IncomeStatement extends Component {
 
     return (
       <div>
-        <div className="navbar">
-          <Navbar />
-        </div>
+        <Navbar />
         <div className="incomestatement">
-          <Sidenav />
+          {/* <Sidenav /> */}
 
           <div className="statement-header">
             <h1>Welcome to Step 1!</h1>

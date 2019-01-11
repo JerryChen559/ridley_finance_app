@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import "./Home.css";
 
-import Navbar from "./Navbar";
+// import Navbar from "./Navbar";
 
 function Home() {
   const redirect = () => {
@@ -10,18 +10,20 @@ function Home() {
   };
   return (
     <div>
-      <div className="navbar">
+      {/* <div className="navbar">
         <Navbar />
-      </div>
+      </div> */}
       <div className="homedisplay">
         <h1>Welcome to the Ridley Finance App</h1>
         <h2>Let us help you retire early.</h2>
         <span className="getstarted" onClick={() => redirect()}>
-          Get Started
+          Log In / Sign Up
         </span>
         {/* Comment out when done: Link to enter app without signing in */}
         {/* <Link to="/incomestatement">link to bypass login for now</Link> */}
       </div>
+
+      {/* 
       <div className="aboutimage" />
       <div className="aboutdisplay">
         <span className="aboutwords">
@@ -77,6 +79,7 @@ function Home() {
           </h3>
         </span>
       </div>
+      */}
     </div>
   );
 }
