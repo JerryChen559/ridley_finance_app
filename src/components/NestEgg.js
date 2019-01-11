@@ -21,11 +21,26 @@ import sunflowerthree from "../Assets/garden/sunflowerthree.svg";
 
 import Navbar from "./Navbar";
 import "./Navbar.css";
-// import Sidenav from "./Sidenav";
-// import "./Sidenav.css";
 
-//TODO: flowers are updating on input change.
-// stop it from updating on every key stroke.
+import { withStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
+
+const styles = {
+  card: {
+    marginTop: "10px",
+    width: "80%",
+    marginLeft: "auto",
+    marginRight: "auto"
+  },
+  title: {
+    fontSize: 14
+  },
+  pos: {
+    marginBottom: 12
+  }
+};
 
 class NestEgg extends Component {
   constructor(props) {
@@ -60,14 +75,7 @@ class NestEgg extends Component {
 
   componentDidMount() {
     this.getUserDeposits();
-    // NoGo:
-    // this.garden();
   }
-
-  // componentDidUpdate(){
-  // NoGo:
-  //this.garden();
-  // }
 
   // get all deposits by user id
   // set state so that it can be displayed across the page
@@ -188,66 +196,26 @@ class NestEgg extends Component {
         console.log(e);
         return (
           <div key={i} className="depositlook">
+            <img
+              // random number from 0 through 12
+              src={this.state.flowers[Math.floor(Math.random() * 13)]}
+              width="50px"
+              height="50px"
+              alt=""
+            />
             {moment(e.datecreated).format("LL")}{" "}
             <strong>{e.depositemergency}</strong>
             <button
               className="delButton"
               onClick={() => this.delButton(e.depositid)}
             >
-              <strong>Delete</strong>
-            </button>
-          </div>
-        );
-      });
-    let rfund = this.state.alldeposits
-      .filter(e => e.depositretirement !== null)
-      .map((e, i) => {
-        return (
-          <div key={i} className="depositlook">
-            {moment(e.datecreated).format("LL")}{" "}
-            <strong>{e.depositretirement}</strong>
-            <button
-              className="delButton"
-              onClick={() => this.delButton(e.depositid)}
-            >
-              <strong>Delete</strong>
+              <strong>Remove</strong>
             </button>
           </div>
         );
       });
 
-    // NoGo:
-    // let garden = (length) => {
-    //     for (let i = 0; i < length; i++){
-    //       return (
-    //         <div key={i}>
-    //           <img
-    //             // random number from 0 through 12
-    //             src={this.state.flowers[Math.floor(Math.random() * 13)]}
-    //             width="100px"
-    //             height="100px"
-    //             alt=""
-    //           />
-    //         </div>
-    //       );
-    //     }
-    // }
-
-    // NoGo: Flowers from map function changes on every key stroke
-    // let garden = this.state.alldeposits.map((e, i) => {
-    //   return (
-    //     <div key={i}>
-    //       <img
-    //         // random number from 0 through 12
-    //         src={this.state.flowers[Math.floor(Math.random() * 13)]}
-    //         width="100px"
-    //         height="100px"
-    //         alt=""
-    //       />
-    //     </div>
-    //   );
-    // });
-
+    const { classes } = this.props;
     return (
       <div className="nestegg">
         <Navbar />
@@ -256,68 +224,51 @@ class NestEgg extends Component {
           <h2>Step 2: Build a Nest Egg</h2>
         </div>
 
-        <div className="nestegg-body">
-          <div className="nestegg-left">
-            <div className="emergencyfund">
-              <h2 style={{ color: "khaki" }}>Emergency Fund</h2>
-              <span>
-                <input
-                  type="number"
-                  placeholder="amount"
-                  value={this.state.depositemergency}
-                  onChange={e =>
-                    this.handleInput("depositemergency", e.target.value)
-                  }
-                />
-                <button
-                  className="nestegg-add"
-                  onClick={() => {
-                    this.submitEmergencyDeposit();
-                  }}
-                >
-                  <strong>Add on click</strong>
-                </button>
-              </span>
-              <h3>Deposit Amounts</h3>
-              {efund}
-            </div>
+        <div>
+          {/* Email Card */}
+          <Card className={classes.card}>
+            <CardContent>
+              <h2 style={{ color: "indigo" }}>Record Deposit</h2>
 
-            <div className="retirementfund">
-              <h2 style={{ color: "khaki" }}>Retirement Fund</h2>
-              <span>
-                <input
-                  type="number"
-                  placeholder="amount"
-                  value={this.state.depositretirement}
-                  onChange={e =>
-                    this.handleInput("depositretirement", e.target.value)
-                  }
-                />
-                <button
-                  className="nestegg-add"
-                  onClick={() => {
-                    this.submitRetirementDeposit();
-                  }}
-                >
-                  <strong>Add on click</strong>
-                </button>
-              </span>
-              <h3>Deposit Amounts</h3>
-              {rfund}
-            </div>
-          </div>
-          <div className="nestegg-right">
-            <h2 style={{ color: "khaki" }}>Garden of Wealth</h2>
-            <div className="garden">
-              {/* {garden} */}
-              {this.garden(this.state.alldeposits.length)}
-            </div>
-          </div>
-          <h2 className="step2">
-            >>> Onto step 3: Plan your{" "}
-            <Link to="/retirementplan"> retirement!</Link>
-          </h2>
+              <input
+                type="number"
+                placeholder="amount"
+                value={this.state.depositemergency}
+                onChange={e =>
+                  this.handleInput("depositemergency", e.target.value)
+                }
+              />
+
+              <Button
+                style={{ marginLeft: "5%" }}
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                onClick={() => {
+                  this.submitEmergencyDeposit();
+                }}
+              >
+                Deposit
+              </Button>
+            </CardContent>
+          </Card>
         </div>
+
+        <div>
+          {/* Deposit Amounts */}
+          <Card className={classes.card}>
+            <CardContent>
+              <h2 style={{ color: "indigo" }}>Deposit History</h2>
+
+              {efund}
+            </CardContent>
+          </Card>
+        </div>
+
+        <h2 className="step3" style={{ color: "white" }}>
+          >>> Onto step 3: Plan your{" "}
+          <Link to="/retirementplan"> retirement!</Link>
+        </h2>
       </div>
     );
   }
@@ -325,4 +276,4 @@ class NestEgg extends Component {
 
 const mapStateToProps = state => state;
 
-export default connect(mapStateToProps)(NestEgg);
+export default connect(mapStateToProps)(withStyles(styles)(NestEgg));

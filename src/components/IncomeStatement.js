@@ -321,39 +321,13 @@ class IncomeStatement extends Component {
                 <p>{this.state.monthlynetincome}</p>
               </div>
             </div>
-
-            {/* <h3
-              style={{ marginTop: "10px" }}
-            >
-              <strong style={{ color: "khaki" }}>Summary:</strong> With all
-              expenses paid, you are left with{" "}
-              <strong>{(this.state.monthlynetpercent * 100).toFixed(2)}</strong>
-              % of your net income.
-            </h3>
-
-            <h3
-              style={{ marginTop: "10px" }}
-            >
-              <strong style={{ color: "khaki" }}>Email:</strong> Send yourself a
-              summary of your income statement:
-              <input
-                type="text"
-                placeholder="email"
-                onChange={e => this.handleInput("email", e.target.value)}
-              />
-              <button onClick={() => this.sendIncomeStatement()}>
-                <strong>Email</strong>
-              </button>
-            </h3> */}
           </div>
 
           <div className="cards">
             {/* Summary Card */}
             <Card className={classes.card}>
               <CardContent>
-                <Typography variant="h5" component="h2">
-                  Summary
-                </Typography>
+                <h2 style={{ color: "indigo" }}>Summary</h2>
 
                 <Typography component="p">
                   <h3>
@@ -368,9 +342,7 @@ class IncomeStatement extends Component {
             {/* Email Card */}
             <Card className={classes.card}>
               <CardContent>
-                <Typography variant="h5" component="h2">
-                  Email
-                </Typography>
+                <h2 style={{ color: "indigo" }}>Email</h2>
 
                 <Typography component="p">
                   <h3>Send yourself a summary of your income statement:</h3>
@@ -398,7 +370,7 @@ class IncomeStatement extends Component {
 
           <div className="graph-body">
             <div>
-              <h2 style={{ color: "#333", textAlign: "center" }}>
+              <h2 style={{ color: "indigo", textAlign: "center" }}>
                 Breakdown of expenses
               </h2>
               <Doughnut
