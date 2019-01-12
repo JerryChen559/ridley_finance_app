@@ -1,53 +1,19 @@
 /* entire income statement page */
 .retire {
   width: 100%;
-  height: 190vh;
+  height: 100%;
   color: aliceblue;
   background-image: linear-gradient(70deg, #5433ff, #20bdff);
-  /* background-image: url(../Assets/erin-simmons-382348-unsplash.jpg);
-  background-repeat: no-repeat, no-repeat;
-  background-position: center;
-  background-size: cover; */
 }
 
 /* header - title of the page */
 .retire-header {
-  width: 100%;
   height: 10vh;
   color: white;
   font-family: Arial;
   font-size: 20px;
   text-align: center;
-  /* remove when done */
-  /* border: orange 1px solid; */
   padding-top: 10vh;
-}
-
-.retire-body {
-  /* remove when done */
-  /* border: red 1px solid; */
-  width: 76%;
-  height: 900px;
-  float: right;
-  padding-top: 11vh;
-  padding-right: 20px;
-  margin-right: 2vw;
-  display: flex;
-}
-
-/* deposits portion */
-/* .retire-left { */
-/* remove when done */
-/* border: black 1px solid; */
-/* } */
-
-.fire {
-  /* remove when done */
-  /* border: 1px lime dotted; */
-  height: 40%;
-  width: 40vw;
-  display: flex;
-  flex-direction: column;
 }
 
 input:hover {
@@ -62,25 +28,17 @@ input:hover {
   margin-left: 10px;
 }
 
-.asset {
-  /* remove when done */
-  /* border: 1px green dotted; */
-  height: 60%;
-  width: 40vw;
+.retire-inputs {
   display: flex;
-  flex-direction: column;
 }
 
-.retire-right {
-  /* remove when done */
-  /* border: pink 1px solid; */
+.retire-charts {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   text-align: center;
 }
 
 /* // container for charts */
-
 /* // ------------------------------------------------- */
 
 /* // input field */
@@ -88,8 +46,8 @@ input:hover {
 input[type="range"] {
   height: 34px;
   -webkit-appearance: none;
-  margin: 10px 0;
-  width: 100%;
+  /* margin: 10px 0; */
+  /* width: 100%; */
 }
 input[type="range"]:focus {
   outline: none;
@@ -182,20 +140,19 @@ input[type="range"]:focus::-ms-fill-upper {
 /* // ------------------------------------------------- */
 
 .range-field {
-  min-height: 91px;
-  width: 90%;
-  /* maybe - good: directs the user - bad: does not loog good */
-  /* border: 5px solid white; */
-  /* border-radius: 10px; */
   text-align: center;
   display: flex;
   flex-direction: column;
+  margin-top: 2%;
 }
 .range-field input {
   margin-left: 0;
-  width: 75%;
+  width: 50%;
 }
 .slider-num {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   justify-content: space-around;
 }
@@ -206,8 +163,6 @@ input[type="range"]:focus::-ms-fill-upper {
   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-
-  margin-top: 10px;
 }
 
 .line-graph-container {
@@ -215,21 +170,4 @@ input[type="range"]:focus::-ms-fill-upper {
   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-
-  margin-top: 5vh;
-}
-
-/* link to next page */
-.step4 {
-  margin-top: 45px;
-  /* position: relative;
-  bottom: 0;
-  border: 1px greenyellow solid; */
-}
-
-.step4 a {
-  color: orange;
-}
-.step4 a:hover {
-  color: yellow;
 }

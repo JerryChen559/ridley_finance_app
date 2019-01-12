@@ -8,6 +8,26 @@ import { Bar, Line } from "react-chartjs-2";
 import Navbar from "./Navbar";
 // import Sidenav from "./Sidenav";
 
+import { withStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+
+const styles = {
+  card: {
+    marginTop: "10px",
+    width: "60%",
+    marginLeft: "auto",
+    marginRight: "auto"
+  },
+  title: {
+    fontSize: 14
+  },
+  pos: {
+    marginBottom: 12
+  }
+};
+
 class RetirementPlan extends Component {
   constructor(props) {
     super(props);
@@ -105,11 +125,6 @@ class RetirementPlan extends Component {
       this.state.monthlynetpercent * this.state.monthlyincome * 12 * yearsleft;
     let savingsyears =
       (savings / (this.state.monthlyincome * 12 * yearsleft)) * yearsleft;
-
-    // console.log("assetyears:", assetyears);
-    // console.log("savings:", savings);
-    // console.log("savingsyears:", savingsyears);
-    // console.log("fire:", fire);
 
     let yearcount =
       yearsleft - assetyears - savingsyears > 0
@@ -210,152 +225,155 @@ class RetirementPlan extends Component {
       ]
     };
 
+    const { classes } = this.props;
     return (
       <div className="retire">
         <Navbar />
 
-        {/* <Sidenav /> */}
         <div className="retire-header">
           <h2>Step 3: Retirement Plan</h2>
-          {/* <h5>(Move the slider! Increase savings for early retirement)</h5> */}
         </div>
 
-        <div className="retire-body">
-          <div className="retire-left">
-            <div className="fire">
-              <h3 style={{ color: "khaki" }}>
-                Calculation for (FIRE) Financial Independence Retire Early
-              </h3>
+        <div className="retire-inputs">
+          {/* card for Retire Amoumt */}
+          <Card className={classes.card}>
+            <CardContent>
+              <Typography
+                className={classes.title}
+                color="textSecondary"
+                gutterBottom
+              >
+                Calculate your (FIRE) retirement amount
+              </Typography>
 
-              <h4>
-                Please input your age
+              <h2 style={{ color: "indigo", marginBottom: "0px" }}>
+                Financial Independence Retire Early{" "}
+              </h2>
+              <Typography className={classes.pos} color="textSecondary">
+                This number represents how much you need in the bank to go the
+                rest of your life without any additional income.
+              </Typography>
+              <Typography component="p">
+                Please input your age{" "}
                 <input
+                  style={{ width: "30px", marginLeft: "0" }}
                   value={this.state.age}
                   placeholder="age"
                   onChange={e => this.changeAge(e.target.value)}
                 />
-              </h4>
-              <h4>
-                Your number to be financially free is: ($
-                {fire.toLocaleString()})
-              </h4>
-              <h5>
-                * This number represents how much you need in the bank to go the
-                rest of your life without any additional income.{" "}
-              </h5>
-              {/* <h6>
-                *Math: (monthly expenses * 12 * (78 - age)) * (1.02**(78 - age))
-              </h6> */}
-            </div>
+              </Typography>
+              <Typography component="p">
+                Your number to be financially free is: {fire.toLocaleString()}
+              </Typography>
+            </CardContent>
+          </Card>
 
-            <div className="asset">
-              <h3 style={{ color: "khaki" }}>Current Assets</h3>
+          {/* card for Work Years Left */}
+          <Card className={classes.card}>
+            <CardContent>
+              <Typography
+                className={classes.title}
+                color="textSecondary"
+                gutterBottom
+              >
+                Track your valuation and calculate remaining work years
+              </Typography>
 
-              <h4>
-                Please input your current total assets (cash, stocks, bank
-                valuation of home)
+              <h2 style={{ color: "indigo", marginBottom: "0px" }}>
+                Current Assets
+              </h2>
+              <Typography className={classes.pos} color="textSecondary">
+                Assets have value and accumulates income (stocks, rare metals,
+                property, business)
+              </Typography>
+              <Typography component="p">
+                Please input your your total valuation{" "}
                 <input
+                  style={{ width: "80px", marginLeft: "0" }}
                   value={this.state.asset}
                   placeholder="total assets"
                   onChange={e => this.changeAsset(e.target.value)}
                 />
-              </h4>
+              </Typography>
+              <Typography component="p">
+                Your current savings percent:{" "}
+                {(this.state.monthlynetpercent * 100).toFixed(2)}%
+              </Typography>
+              <Typography component="p">
+                Number of working YEARS until you are financially free:{" "}
+                {yearcount.toFixed(2)}
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
 
-              <h4>
-                Your current savings percent: (
-                {(this.state.monthlynetpercent * 100).toFixed(2)}%){" "}
-              </h4>
-              {/* Remove Months of work left. People don't care about this. */}
-              {/* 
-              <h4>
-                Number of working MONTHS until you are financially free: (
-                {monthcount})
-              </h4>
-              */}
-              <h4>
-                Number of working YEARS until you are financially free: (
-                {yearcount.toFixed(2)})
-              </h4>
+        {/* Slider */}
+        <div className="range-field">
+          <span style={{ color: "khaki" }}>
+            <strong>Savings of Net Income:</strong>{" "}
+          </span>
+          <span>
+            <input
+              type="range"
+              name="slider"
+              min="20"
+              max="70"
+              defaultValue="20"
+              onChange={e =>
+                this.setState({
+                  monthlynetpercent: e.target.value / 100
+                })
+              }
+            />
+          </span>
+          <span className="slider-num">
+            <span>20%</span>
+            <span>30%</span>
+            <span>40%</span>
+            <span>50%</span>
+            <span>60%</span>
+            <span>70%</span>
+          </span>
+        </div>
 
-              {/* <h6>
-                *Math: Square root (Log((fire - asset) / (monthly net income)) /
-                Log(1.02))
-              </h6> */}
-            </div>
+        <div className="retire-charts">
+          {/* --- <BarGraph /> --- */}
+          <div className="bar-chart-container" style={{ width: "49%" }}>
+            {/* <h2>Bar Example (custom size)</h2> */}
+            <h4 style={{ color: "#333" }}>Five Year Projection</h4>
+
+            <h6 style={{ color: "#333" }}>
+              *Financially free when the bar graphs equal
+            </h6>
+            <Bar
+              style={{ display: "block" }}
+              data={data_bar}
+              // width={30}
+              // height={10}
+              // options={{
+              //   maintainAspectRatio: false
+              // }}
+            />
           </div>
-          <div className="retire-right">
-            {/* <div className="chartjs"> */}
-            <div className="bar-chart-container">
-              {/* <h2>Bar Example (custom size)</h2> */}
-              <h4 style={{ color: "#333" }}>Five Year Projection</h4>
 
-              {/* --- <BarGraph /> --- */}
-              <h6 style={{ color: "#333" }}>
-                *Financially free when the bar graphs equal
-              </h6>
-              <Bar
-                style={{ display: "block" }}
-                data={data_bar}
-                // width={30}
-                // height={10}
-                // options={{
-                //   maintainAspectRatio: false
-                // }}
-              />
-            </div>
-            <br />
-            <div className="range-field">
-              <span style={{ color: "khaki" }}>
-                <strong>Savings of Net Income:</strong>{" "}
-              </span>
-              <span>
-                <input
-                  type="range"
-                  name="slider"
-                  min="20"
-                  max="70"
-                  defaultValue="20"
-                  onChange={e =>
-                    this.setState({
-                      monthlynetpercent: e.target.value / 100
-                    })
-                  }
-                />
-              </span>
-              <span className="slider-num">
-                <span>20%</span>
-                <span>30%</span>
-                <span>40%</span>
-                <span>50%</span>
-                <span>60%</span>
-                <span>70%</span>
-              </span>
-            </div>
-
-            {/* --- <LineGraph /> --- */}
-            <div className="line-graph-container">
-              <h4 style={{ color: "#333" }}>
-                Rate of savings to Time until retirement{" "}
-              </h4>
-              <Line data={data_line} />
-            </div>
-            <div className="step4">
-              <h3>
-                >>> Onto step 4, the bonus section: Plan your
-                <Link to="/desiredpurchases"> purchases!</Link>
-              </h3>
-              {/* Post MVP
-            <span>**add nodemailer**</span>
-            <button>nodemailer</button> */}
-            </div>
+          {/* --- <LineGraph /> --- */}
+          <div className="line-graph-container" style={{ width: "49%" }}>
+            <h4 style={{ color: "#333" }}>
+              Rate of savings to Time until retirement{" "}
+            </h4>
+            <Line data={data_line} />
           </div>
         </div>
+
+        <h2 className="step3" style={{ color: "aliceblue" }}>
+          >>> Onto step 4, the bonus section: Rank your future
+          <Link to="/retirementplan"> purchases!</Link>
+        </h2>
       </div>
-      // </div>
     );
   }
 }
 
 const mapStateToProps = state => state;
 
-export default connect(mapStateToProps)(RetirementPlan);
+export default connect(mapStateToProps)(withStyles(styles)(RetirementPlan));
