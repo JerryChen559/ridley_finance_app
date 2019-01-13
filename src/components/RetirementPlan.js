@@ -6,7 +6,6 @@ import "./RetirementPlan.css";
 
 import { Bar, Line } from "react-chartjs-2";
 import Navbar from "./Navbar";
-// import Sidenav from "./Sidenav";
 
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -15,8 +14,8 @@ import Typography from "@material-ui/core/Typography";
 
 const styles = {
   card: {
-    marginTop: "10px",
-    width: "60%",
+    marginTop: "2%",
+    width: "46%",
     marginLeft: "auto",
     marginRight: "auto"
   },
@@ -231,7 +230,7 @@ class RetirementPlan extends Component {
         <Navbar />
 
         <div className="retire-header">
-          <h2>Step 3: Retirement Plan</h2>
+          <h2 style={{ fontSize: "30px" }}>Step 3: Retirement Plan</h2>
         </div>
 
         <div className="retire-inputs">
@@ -280,14 +279,14 @@ class RetirementPlan extends Component {
               </Typography>
 
               <h2 style={{ color: "indigo", marginBottom: "0px" }}>
-                Current Assets
+                Total Assets
               </h2>
               <Typography className={classes.pos} color="textSecondary">
                 Assets have value and accumulates income (stocks, rare metals,
                 property, business)
               </Typography>
               <Typography component="p">
-                Please input your your total valuation{" "}
+                Please input your valuation{" "}
                 <input
                   style={{ width: "80px", marginLeft: "0" }}
                   value={this.state.asset}
@@ -296,8 +295,10 @@ class RetirementPlan extends Component {
                 />
               </Typography>
               <Typography component="p">
-                Your current savings percent:{" "}
-                {(this.state.monthlynetpercent * 100).toFixed(2)}%
+                Your current savings percentage:{" "}
+                <strong style={{ color: "orange" }}>
+                  {(this.state.monthlynetpercent * 100).toFixed(2)}%
+                </strong>
               </Typography>
               <Typography component="p">
                 Number of working YEARS until you are financially free:{" "}
@@ -310,7 +311,7 @@ class RetirementPlan extends Component {
         {/* Slider */}
         <div className="range-field">
           <span style={{ color: "khaki" }}>
-            <strong>Savings of Net Income:</strong>{" "}
+            <strong>Savings Percentage of Net Income:</strong>{" "}
           </span>
           <span>
             <input
@@ -367,7 +368,7 @@ class RetirementPlan extends Component {
 
         <h2 className="step3" style={{ color: "aliceblue" }}>
           >>> Onto step 4, the bonus section: Rank your future
-          <Link to="/retirementplan"> purchases!</Link>
+          <Link to="/desiredpurchases"> purchases!</Link>
         </h2>
       </div>
     );

@@ -93,7 +93,7 @@ class DesiredPurchases extends Component {
       <div>
         <Navbar />
         <div className="desiredpurchases">
-          <h2 className="step4">Step 4: Desired Purchases</h2>
+          <h2 className="retire-header">Step 4: Desired Purchases</h2>
           <div className="instructions">
             <span className="leftside">
               <p>
@@ -109,26 +109,11 @@ class DesiredPurchases extends Component {
             </span>
           </div>
           <div className="cardcontainer">{orderedCards}</div>
-          <h3 className="ReturnToAppBtn">
-            <Link to="/incomestatement">
-              <button>You're done! Go home.</button>
-            </Link>
-          </h3>
 
-          {/* <nav className="bottom-nav">
-            <span>
-              Step 1 <Link to="/incomestatement"> Income Statement </Link>
-            </span>
-            <span>
-              Step 2 <Link to="/nestegg"> Nest Egg </Link>
-            </span>
-            <span>
-              Step 3 <Link to="/retirementplan"> Retirement Plan </Link>
-            </span>
-            <span>
-              Step 4 <Link to="/desiredpurchases"> Desired Purchases </Link>
-            </span>
-          </nav> */}
+          <h2 className="step3" style={{ color: "aliceblue" }}>
+            >>> You're done! Go
+            <Link to="/incomestatement"> home!</Link>
+          </h2>
         </div>
       </div>
     );

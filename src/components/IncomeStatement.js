@@ -215,12 +215,10 @@ class IncomeStatement extends Component {
           </div>
 
           <div className="statement-body">
-            <h3 style={{ color: "khaki" }}>
-              Monthly Income Statement
-              <span className="update">
-                <Link to="/wizardone/1">Update Info</Link>
-              </span>
-            </h3>
+            <span className="update">
+              <Link to="/wizardone/1">Update Info</Link>
+            </span>
+            <h3 style={{ color: "khaki" }}>Monthly Income Statement</h3>
 
             <div className="spreadsheet">
               <div style={{ fontSize: 18, marginLeft: 100 }}>INCOME</div>

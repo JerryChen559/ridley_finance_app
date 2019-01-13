@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import "./LearnMore.css";
+
+import Navbar from "./Navbar";
 
 class LearnMore extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class LearnMore extends Component {
 
     return (
       <div className="LearnMore-body">
+        <Navbar />
         <span className="LearnMore-title">
           <h1>More to Learn</h1>
         </span>

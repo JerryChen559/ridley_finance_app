@@ -11,7 +11,7 @@
   height: 10vh;
   color: white;
   font-family: Arial;
-  font-size: 20px;
+  font-size: 30px;
   text-align: center;
   padding-top: 10vh;
 }
@@ -33,6 +33,7 @@ input:hover {
 }
 
 .retire-charts {
+  margin-top: 2%;
   display: flex;
   justify-content: center;
   text-align: center;
