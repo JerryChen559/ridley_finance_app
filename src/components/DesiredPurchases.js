@@ -6,6 +6,27 @@ import axios from "axios";
 import Navbar from "./Navbar";
 import "./DesiredPurchases.css";
 
+import { withStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+
+const styles = {
+  card: {
+    marginTop: "2%",
+    width: "46%",
+    marginLeft: "auto",
+    marginRight: "auto"
+  },
+  title: {
+    fontSize: 14
+  },
+  pos: {
+    marginBottom: 12
+  }
+};
+
 class DesiredPurchases extends Component {
   constructor(props) {
     super(props);
@@ -54,37 +75,53 @@ class DesiredPurchases extends Component {
     // console.log("cardprops", this.props);
 
     let orderedCards = this.state.cards.map((card, i) => (
-      <div className="card" key={i}>
-        <span className="cardtitle">
-          <span>Item: {card.itemname}</span>
-          <span>Price: {card.price}</span>
-          <span>
-            <strong style={{ float: "right", color: "yellow" }}>
-              #{card.importance}
-            </strong>
-          </span>
-        </span>
-        <span>
-          <Link
-            to={{
-              pathname: `/desiredPurchase/${card.purchasecardid}`
-              // Only need to pass in a state with the item's id
-              // if I need it in the editing page.
-              // Should be available on this.props.match.params.purchasecardid
-              // state: { purchasecardid: card.purchasecardid }
-            }}
-          >
-            <button className="updateButton">
-              <strong>Update</strong>
-            </button>
-          </Link>
-          <button
-            className="delCardBtn"
-            onClick={() => this.delButton(card.purchasecardid)}
-          >
-            <strong>Delete</strong>
-          </button>
-        </span>
+      <div key={i}>
+        <Card className={this.props.classes.card}>
+          <h4 style={{ color: "indigo", float: "right", paddingRight: "3%" }}>
+            <strong>#{card.importance}</strong>
+          </h4>
+          <CardContent>
+            <h3
+              style={{
+                color: "indigo",
+                marginTop: "0px",
+                marginBottom: "0px"
+              }}
+            >
+              Item: {card.itemname}
+            </h3>
+            <Typography
+              className={this.props.classes.pos}
+              color="textSecondary"
+            >
+              Note: {card.note}
+            </Typography>
+            <Typography component="p">Price: {card.price}</Typography>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Link
+                to={{
+                  pathname: `/desiredPurchase/${card.purchasecardid}`
+                }}
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={this.props.classes.button}
+                  onClick={() => {}}
+                >
+                  <strong>Update</strong>
+                </Button>
+              </Link>
+
+              <button
+                className="delButton"
+                onClick={() => this.delButton(card.purchasecardid)}
+              >
+                <strong>Remove</strong>
+              </button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     ));
     // .sort((a, b) => a.importance - b.importance);
@@ -93,6 +130,7 @@ class DesiredPurchases extends Component {
       <div>
         <Navbar />
         <div className="desiredpurchases">
+          {/* header */}
           <h2 className="retire-header">Step 4: Desired Purchases</h2>
           <div className="instructions">
             <span className="leftside">
@@ -102,14 +140,17 @@ class DesiredPurchases extends Component {
               </p>
               <p>Managing your expenses can lead to conscious spending.</p>
             </span>
+            {/* add card */}
             <span className="rightside">
               <button className="addcardbtn" onClick={() => this.addCard()}>
                 add new card
               </button>
             </span>
           </div>
-          <div className="cardcontainer">{orderedCards}</div>
 
+          {orderedCards}
+
+          {/* next step */}
           <h2 className="step3" style={{ color: "aliceblue" }}>
             >>> You're done! Go
             <Link to="/incomestatement"> home!</Link>
@@ -122,4 +163,4 @@ class DesiredPurchases extends Component {
 
 const mapStateToProps = state => state;
 
-export default connect(mapStateToProps)(DesiredPurchases);
+export default connect(mapStateToProps)(withStyles(styles)(DesiredPurchases));

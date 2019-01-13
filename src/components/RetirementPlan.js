@@ -262,7 +262,8 @@ class RetirementPlan extends Component {
                 />
               </Typography>
               <Typography component="p">
-                Your number to be financially free is: {fire.toLocaleString()}
+                Your number to be financially free is:{" "}
+                <strong>${fire.toLocaleString()}</strong>
               </Typography>
             </CardContent>
           </Card>
@@ -302,7 +303,7 @@ class RetirementPlan extends Component {
               </Typography>
               <Typography component="p">
                 Number of working YEARS until you are financially free:{" "}
-                {yearcount.toFixed(2)}
+                <strong>{yearcount.toFixed(2)}</strong>
               </Typography>
             </CardContent>
           </Card>

@@ -228,15 +228,15 @@ class IncomeStatement extends Component {
               </div>
               <div>
                 Federal Income Tax:
-                <p>{this.state.federaltax}</p>
+                <p>{this.state.federaltax}%</p>
               </div>
               <div>
                 State Income Tax:
-                <p>{this.state.statetax}</p>
+                <p>{this.state.statetax}%</p>
               </div>
               <div>
                 Federal Insurance Contributions Act (FICA):
-                <p>7.65</p>
+                <p>7.65%</p>
               </div>
               <div>
                 Side Income / Secondary Income:
@@ -330,8 +330,10 @@ class IncomeStatement extends Component {
                 <Typography component="p">
                   <h3>
                     With all expenses paid, you are left with{" "}
-                    {(this.state.monthlynetpercent * 100).toFixed(2)}% of your
-                    net income.
+                    <strong style={{ color: "orange" }}>
+                      {(this.state.monthlynetpercent * 100).toFixed(2)}%
+                    </strong>{" "}
+                    of your net income.
                   </h3>
                 </Typography>
               </CardContent>

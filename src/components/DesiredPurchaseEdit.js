@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
-// import { connect } from "react-redux";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import "./DesiredPurchaseEdit.css";
@@ -12,6 +10,7 @@ class DesiredPurchaseEdit extends Component {
     this.state = {
       purchasecardid: "",
       itemname: "",
+      note: "",
       price: "",
       importance: "",
       redirect: false
@@ -29,6 +28,7 @@ class DesiredPurchaseEdit extends Component {
       this.setState({
         purchasecardid: response.data[0].purchasecardid,
         itemname: response.data[0].itemname,
+        note: response.data[0].note,
         price: response.data[0].price,
         importance: response.data[0].importance
       });
@@ -40,6 +40,7 @@ class DesiredPurchaseEdit extends Component {
     axios
       .put(`/api/card/${this.state.purchasecardid}`, {
         itemname: this.state.itemname,
+        note: this.state.note,
         price: this.state.price,
         importance: this.state.importance
       })
@@ -47,6 +48,7 @@ class DesiredPurchaseEdit extends Component {
         console.log(response);
         this.setState({
           // itemname: response.data.itemname,
+          // note: response.data.note,
           // price: response.data.price,
           // importance: response.data.importance,
           redirect: !this.state.redirect
@@ -85,6 +87,16 @@ class DesiredPurchaseEdit extends Component {
                 placeholder="Name of the item you want to buy"
                 value={this.state.itemname}
                 onChange={e => this.updateTopic("itemname", e.target.value)}
+              />
+            </span>
+            <br />
+            <span className="input-row">
+              <p>Note:</p>
+              <input
+                type="text"
+                placeholder="Make a note on why you want to buy this item"
+                value={this.state.note}
+                onChange={e => this.updateTopic("note", e.target.value)}
               />
             </span>
             <br />

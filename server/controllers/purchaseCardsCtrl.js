@@ -39,11 +39,11 @@ const addCard = (req, res) => {
 // PUT (update) a card by id
 const updateCard = (req, res) => {
   const { cardid } = req.params;
-  const { itemname, price, importance } = req.body;
+  const { itemname, note, price, importance } = req.body;
   console.log(cardid, itemname, price, importance);
   const db = req.app.get("db");
 
-  db.update_card([cardid, itemname, price, importance])
+  db.update_card([cardid, itemname, note, price, importance])
     .then(response => {
       console.log("newCard:", response);
       res.status(200).send(response);

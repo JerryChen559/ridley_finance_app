@@ -248,7 +248,7 @@ class NestEgg extends Component {
                   this.submitEmergencyDeposit();
                 }}
               >
-                Deposit
+                <strong>Deposit</strong>
               </Button>
             </CardContent>
           </Card>
