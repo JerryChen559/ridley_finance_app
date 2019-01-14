@@ -4,32 +4,10 @@
   width: 100%;
   height: 100%;
   color: white;
-  font-weight: 600;
+  /* font-weight: 600; */
 
   background-image: url(../Assets/erin-simmons-382348-unsplash.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-}
-
-.aboutdisplay h1 {
-  margin: 0;
-}
-
-.aboutdisplay a {
-  color: #f9ff00;
-  text-align: center;
-}
-.aboutdisplay a:hover {
-  color: orange;
-}
-
-/* About section words */
-.aboutwords h1 {
-  text-align: center;
-}
-
-.aboutwords p {
-  margin-left: 10px;
-  /* text-align: center; */
 }

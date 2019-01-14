@@ -22,10 +22,12 @@ class LearnMore extends Component {
 
     return (
       <div className="LearnMore-body">
-        <Navbar />
-        <span className="LearnMore-title">
-          <h1>More to Learn</h1>
-        </span>
+        <div>
+          <Navbar />
+        </div>
+        <div className="LearnMore-title">
+          <h1>Learn More Fun Topics in Finance</h1>
+        </div>
 
         <div className="infobox">
           <span className="infosection">
@@ -194,9 +196,7 @@ class LearnMore extends Component {
         </div>
 
         <h3 className="ReturnToAppBtn">
-          <button onClick={() => this.handleReturnBtn()}>
-            Back to the App!
-          </button>
+          <button onClick={() => this.handleReturnBtn()}>Go Back!</button>
         </h3>
       </div>
     );

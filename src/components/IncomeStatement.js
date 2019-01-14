@@ -13,8 +13,30 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Modal from "@material-ui/core/Modal";
 
-const styles = {
+// const styles = {
+//   card: {
+//     marginTop: "10px",
+//     width: "44%"
+//   },
+//   title: {
+//     fontSize: 14
+//   },
+//   pos: {
+//     marginBottom: 12
+//   }
+// };
+
+const styles = theme => ({
+  paper: {
+    position: "absolute",
+    width: theme.spacing.unit * 50,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+    outline: "none"
+  },
   card: {
     marginTop: "10px",
     width: "44%"
@@ -25,7 +47,22 @@ const styles = {
   pos: {
     marginBottom: 12
   }
-};
+});
+
+// function rand() {
+//   return Math.round(Math.random() * 20) - 10;
+// }
+
+// function getModalStyle() {
+//   const top = 50 + rand();
+//   const left = 50 + rand();
+
+//   return {
+//     top: `${top}%`,
+//     left: `${left}%`,
+//     transform: `translate(-${top}%, -${left}%)`
+//   };
+// }
 
 class IncomeStatement extends Component {
   constructor(props) {
@@ -53,7 +90,8 @@ class IncomeStatement extends Component {
       monthlyexpenses: 0,
       monthlynetincome: 0,
       monthlynetpercent: 0,
-      email: ""
+      email: "",
+      open: false
     };
   }
 
@@ -131,6 +169,14 @@ class IncomeStatement extends Component {
       })
       .then(response => console.log(response));
   }
+
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   render() {
     // console.log("IS state", this.state);
@@ -215,10 +261,44 @@ class IncomeStatement extends Component {
           </div>
 
           <div className="statement-body">
-            <span className="update">
+            {/* Redux Wizards - updated to use Modal in Material UI */}
+            {/* <span className="update">
               <Link to="/wizardone/1">Update Info</Link>
+            </span> */}
+
+            <span className="spreadsheetTitle">
+              <h2 style={{ color: "khaki" }}>Monthly Income Statement</h2>
+              <button
+                style={{ marginTop: "30px" }}
+                className="addcardbtn"
+                //add onClick to a model update.
+                onClick={() => this.handleOpen()}
+              >
+                Update
+              </button>
+              <Modal
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+                open={this.state.open}
+                onClose={this.handleClose}
+              >
+                <div className={classes.paper}>
+                  <Typography variant="h6" id="modal-title">
+                    Update your income statement
+                  </Typography>
+                  {/* don't need */}
+                  {/* <Typography variant="subtitle1" id="simple-modal-description">
+                    Duis mollis, est non commodo luctus, nisi erat porttitor
+                    ligula.
+                  </Typography> */}
+                  {/* <SimpleModalWrapped /> */}
+                  {/* -------- */}
+                  {/* Use Material UI Text Fields for Update */}
+                  <Button>Cancel</Button>
+                  <Button>Submit Changes</Button>
+                </div>
+              </Modal>
             </span>
-            <h3 style={{ color: "khaki" }}>Monthly Income Statement</h3>
 
             <div className="spreadsheet">
               <div style={{ fontSize: 18, marginLeft: 100 }}>INCOME</div>
@@ -345,7 +425,7 @@ class IncomeStatement extends Component {
                 <h2 style={{ color: "indigo" }}>Email</h2>
 
                 <Typography component="p">
-                  <h3>Send yourself a summary of your income statement:</h3>
+                  <h3>Send yourself a summary of your income statement.</h3>
                 </Typography>
 
                 <input
@@ -362,7 +442,7 @@ class IncomeStatement extends Component {
                   className={classes.button}
                   onClick={() => this.sendIncomeStatement()}
                 >
-                  Send
+                  <strong>Send</strong>
                 </Button>
               </CardContent>
             </Card>
@@ -390,6 +470,14 @@ class IncomeStatement extends Component {
 }
 
 const mapStateToProps = state => state;
+
+// We need an intermediary variable for handling the recursive nesting.
+// const SimpleModalWrapped = withStyles(styles)(IncomeStatement);
+
+// export default connect(
+//   mapStateToProps,
+//   { getUser }
+// )(SimpleModalWrapped);
 
 export default connect(
   mapStateToProps,

@@ -15,10 +15,19 @@
 }
 
 .LearnMore-title {
+  width: 100%;
+  height: 10vh;
+  color: yellow;
+  font-family: Arial;
+  /* font-size: 20px; */
   text-align: center;
+  /* remove when done */
+  /* border: orange 1px solid; */
+  padding-top: 10vh;
 }
 
 .infobox {
+  margin-top: 1%;
   display: flex;
   flex-direction: column;
   /* remove when done */

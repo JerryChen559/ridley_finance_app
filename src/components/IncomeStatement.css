@@ -9,7 +9,7 @@
 
 /* header - title of the page */
 .statement-header {
-  width: 100%;
+  /* width: 100%; */
   height: 10vh;
   color: white;
   font-family: Arial;
@@ -25,6 +25,13 @@
   width: 60%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.spreadsheetTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 2%;
 }
 
 .cards {
