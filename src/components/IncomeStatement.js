@@ -13,7 +13,10 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+
 import Modal from "@material-ui/core/Modal";
+import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
 
 // const styles = {
 //   card: {
@@ -46,8 +49,42 @@ const styles = theme => ({
   },
   pos: {
     marginBottom: 12
+  },
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit
+  },
+  dense: {
+    marginTop: 16
+  },
+  menu: {
+    width: 200
   }
 });
+
+// TODO - Update to % state tax and fed tax
+const currencies = [
+  {
+    value: "USD",
+    label: "$"
+  },
+  {
+    value: "EUR",
+    label: "€"
+  },
+  {
+    value: "BTC",
+    label: "฿"
+  },
+  {
+    value: "JPY",
+    label: "¥"
+  }
+];
 
 // function rand() {
 //   return Math.round(Math.random() * 20) - 10;
@@ -91,7 +128,24 @@ class IncomeStatement extends Component {
       monthlynetincome: 0,
       monthlynetpercent: 0,
       email: "",
-      open: false
+      open: false,
+      salary_edit: 0,
+      federaltax_edit: 0,
+      statetax_edit: 0,
+      sideincome_edit: 0,
+      rent_edit: 0,
+      mortgage_edit: 0,
+      car_edit: 0,
+      gas_edit: 0,
+      water_edit: 0,
+      healthcare_edit: 0,
+      school_edit: 0,
+      food_edit: 0,
+      restaurants_edit: 0,
+      clothes_edit: 0,
+      gym_edit: 0,
+      entertainment_edit: 0,
+      travel_edit: 0
     };
   }
 
@@ -127,7 +181,24 @@ class IncomeStatement extends Component {
           monthlyexpenses: response.data[0].monthlyexpenses,
           monthlyincome: response.data[0].monthlyincome,
           monthlynetincome: response.data[0].monthlynetincome,
-          monthlynetpercent: response.data[0].monthlynetpercent
+          monthlynetpercent: response.data[0].monthlynetpercent,
+          salary_edit: response.data[0].salary,
+          federaltax_edit: response.data[0].federaltax,
+          statetax_edit: response.data[0].statetax,
+          sideincome_edit: response.data[0].sideincome,
+          rent_edit: response.data[0].rent,
+          mortgage_edit: response.data[0].mortgage,
+          car_edit: response.data[0].car,
+          gas_edit: response.data[0].gas,
+          water_edit: response.data[0].water,
+          healthcare_edit: response.data[0].healthcare,
+          school_edit: response.data[0].school,
+          food_edit: response.data[0].food,
+          restaurants_edit: response.data[0].restaurants,
+          clothes_edit: response.data[0].clothes,
+          gym_edit: response.data[0].gym,
+          entertainment_edit: response.data[0].entertainment,
+          travel_edit: response.data[0].travel
         });
       });
   }
@@ -140,6 +211,167 @@ class IncomeStatement extends Component {
   // handleChange = input => e => {
   //   this.setState({[input]: e.target.value})
   // }
+
+  // for update form
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
+
+  cancelChanges() {
+    this.setState({
+      salary_edit: this.salary,
+      federaltax_edit: this.federaltax,
+      statetax_edit: this.statetax,
+      sideincome_edit: this.sideincome,
+      rent_edit: this.rent,
+      mortgage_edit: this.mortgage,
+      car_edit: this.car,
+      gas_edit: this.gas,
+      water_edit: this.water,
+      healthcare_edit: this.healthcare,
+      school_edit: this.school,
+      food_edit: this.food,
+      restaurants_edit: this.restaurants,
+      clothes_edit: this.clothes,
+      gym_edit: this.gym,
+      entertainment_edit: this.entertainment,
+      travel_edit: this.travel
+    });
+  }
+
+  //TODO - handleSubmit() from wizard4
+  saveChanges() {
+    console.log(this.props.profile);
+    axios
+      .put(`/api/incomestatement/${this.props.profile.user.auth_id}`, {
+        salary: this.salary,
+        federaltax: this.federaltax,
+        statetax: this.statetax,
+        sideincome: this.sideincome,
+        rent: this.rent,
+        mortgage: this.mortgage,
+        car: this.car,
+        gas: this.gas,
+        water: this.water,
+        healthcare: this.healthcare,
+        school: this.school,
+        food: this.food,
+        restaurants: this.restaurants,
+        clothes: this.clothes,
+        gym: this.gym,
+        entertainment: this.entertainment,
+        travel: this.travel,
+        monthlyexpenses:
+          // monthlyexpenses: all expenses added up
+          +(
+            this.rent * 1 +
+            this.mortgage * 1 +
+            this.car * 1 +
+            this.gas * 1 +
+            this.water * 1 +
+            this.healthcare * 1 +
+            this.school * 1 +
+            this.food * 1 +
+            this.restaurants * 1 +
+            this.clothes * 1 +
+            this.gym * 1 +
+            this.entertainment * 1 +
+            this.travel * 1
+          ),
+        monthlyincome:
+          // monthlyincome: salary-governmentfees+sideincome
+          +(
+            this.salary * 1 -
+            this.salary * (this.federaltax / 100) -
+            this.salary * (this.statetax / 100) -
+            this.salary * 0.0765 +
+            this.sideincome * 1
+          ),
+        monthlynetincome:
+          // monthlynetincome: monthlyincome - monthlyexpenses
+          +(
+            this.salary * 1 -
+            this.salary * (this.federaltax / 100) -
+            this.salary * (this.statetax / 100) -
+            this.salary * 0.0765 +
+            this.sideincome * 1
+          ) -
+          +(
+            this.rent * 1 +
+            this.mortgage * 1 +
+            this.car * 1 +
+            this.gas * 1 +
+            this.water * 1 +
+            this.healthcare * 1 +
+            this.school * 1 +
+            this.food * 1 +
+            this.restaurants * 1 +
+            this.clothes * 1 +
+            this.gym * 1 +
+            this.entertainment * 1 +
+            this.travel * 1
+          ),
+        monthlynetpercent:
+          //monthlynetpercent: monthlynetincome / monthlyincome
+          (+(
+            this.salary * 1 -
+            this.salary * (this.federaltax / 100) -
+            this.salary * (this.statetax / 100) -
+            this.salary * 0.0765 +
+            this.sideincome * 1
+          ) -
+            +(
+              this.rent * 1 +
+              this.mortgage * 1 +
+              this.car * 1 +
+              this.gas * 1 +
+              this.water * 1 +
+              this.healthcare * 1 +
+              this.school * 1 +
+              this.food * 1 +
+              this.restaurants * 1 +
+              this.clothes * 1 +
+              this.gym * 1 +
+              this.entertainment * 1 +
+              this.travel * 1
+            )) /
+          +(
+            this.salary * 1 -
+            this.salary * (this.federaltax / 100) -
+            this.salary * (this.statetax / 100) -
+            this.salary * 0.0765 +
+            this.sideincome * 1
+          )
+      })
+      .then(response => {
+        console.log(response.data);
+        this.setState({
+          salary: response.data[0].salary,
+          federaltax: response.data[0].federaltax,
+          statetax: response.data[0].statetax,
+          sideincome: response.data[0].sideincome,
+          rent: response.data[0].rent,
+          mortgage: response.data[0].mortgage,
+          car: response.data[0].car,
+          gas: response.data[0].gas,
+          water: response.data[0].water,
+          healthcare: response.data[0].healthcare,
+          school: response.data[0].school,
+          food: response.data[0].food,
+          restaurants: response.data[0].restaurants,
+          clothes: response.data[0].clothes,
+          gym: response.data[0].gym,
+          entertainment: response.data[0].entertainment,
+          travel: response.data[0].travel,
+          monthlyexpenses: response.data[0].monthlyexpenses,
+          monthlyincome: response.data[0].monthlyincome,
+          monthlynetincome: response.data[0].monthlynetincome,
+          monthlynetpercent: response.data[0].monthlynetpercent
+        });
+      });
+  }
 
   sendIncomeStatement() {
     axios
@@ -294,8 +526,88 @@ class IncomeStatement extends Component {
                   {/* <SimpleModalWrapped /> */}
                   {/* -------- */}
                   {/* Use Material UI Text Fields for Update */}
-                  <Button>Cancel</Button>
-                  <Button>Submit Changes</Button>
+                  {/* TODO - Update form */}
+                  <form
+                    className={classes.container}
+                    noValidate
+                    autoComplete="off"
+                  >
+                    {/* Keep Number */}
+                    <TextField
+                      id="filled-number"
+                      label="Number"
+                      value={this.state.age}
+                      onChange={this.handleChange("age")}
+                      type="number"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      margin="normal"
+                      variant="filled"
+                    />
+
+                    {/* Keep Select */}
+                    <TextField
+                      id="filled-select-currency"
+                      select
+                      label="Select"
+                      className={classes.textField}
+                      value={this.state.currency}
+                      onChange={this.handleChange("currency")}
+                      SelectProps={{
+                        MenuProps: {
+                          className: classes.menu
+                        }
+                      }}
+                      helperText="Please select your currency"
+                      margin="normal"
+                      variant="filled"
+                    >
+                      {currencies.map(option => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+
+                    {/* Keep Select */}
+                    <TextField
+                      id="filled-select-currency-native"
+                      select
+                      label="Native select"
+                      className={classes.textField}
+                      value={this.state.currency}
+                      onChange={this.handleChange("currency")}
+                      SelectProps={{
+                        native: true,
+                        MenuProps: {
+                          className: classes.menu
+                        }
+                      }}
+                      helperText="Please select your currency"
+                      margin="normal"
+                      variant="filled"
+                    >
+                      {currencies.map(option => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </TextField>
+
+                    <TextField
+                      id="filled-bare"
+                      className={classes.textField}
+                      defaultValue="Bare"
+                      margin="normal"
+                      variant="filled"
+                    />
+                  </form>
+                  <Button onClick={() => this.cancelChanges()}>Cancel</Button>
+                  <Button onClick={() => this.saveChanges()}>
+                    Submit Changes
+                  </Button>
                 </div>
               </Modal>
             </span>
