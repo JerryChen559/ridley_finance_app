@@ -143,7 +143,7 @@ class DesiredPurchases extends Component {
             {/* add card */}
             <span className="rightside">
               <button className="addcardbtn" onClick={() => this.addCard()}>
-                add new card
+                ADD NEW CARD
               </button>
             </span>
           </div>

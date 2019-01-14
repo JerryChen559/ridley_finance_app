@@ -15,30 +15,22 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 import Modal from "@material-ui/core/Modal";
-import MenuItem from "@material-ui/core/MenuItem";
+// import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
-
-// const styles = {
-//   card: {
-//     marginTop: "10px",
-//     width: "44%"
-//   },
-//   title: {
-//     fontSize: 14
-//   },
-//   pos: {
-//     marginBottom: 12
-//   }
-// };
 
 const styles = theme => ({
   paper: {
     position: "absolute",
-    width: theme.spacing.unit * 50,
+    // width: theme.spacing.unit * 50,
+    width: "70%",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: "none"
+    outline: "none",
+    // this adds scroll to edit form
+    marginTop: "1%",
+    height: "70%",
+    overflow: "auto"
   },
   card: {
     marginTop: "10px",
@@ -56,7 +48,8 @@ const styles = theme => ({
   },
   textField: {
     marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing.unit,
+    width: "120px"
   },
   dense: {
     marginTop: 16
@@ -65,41 +58,6 @@ const styles = theme => ({
     width: 200
   }
 });
-
-// TODO - Update to % state tax and fed tax
-const currencies = [
-  {
-    value: "USD",
-    label: "$"
-  },
-  {
-    value: "EUR",
-    label: "€"
-  },
-  {
-    value: "BTC",
-    label: "฿"
-  },
-  {
-    value: "JPY",
-    label: "¥"
-  }
-];
-
-// function rand() {
-//   return Math.round(Math.random() * 20) - 10;
-// }
-
-// function getModalStyle() {
-//   const top = 50 + rand();
-//   const left = 50 + rand();
-
-//   return {
-//     top: `${top}%`,
-//     left: `${left}%`,
-//     transform: `translate(-${top}%, -${left}%)`
-//   };
-// }
 
 class IncomeStatement extends Component {
   constructor(props) {
@@ -221,128 +179,129 @@ class IncomeStatement extends Component {
 
   cancelChanges() {
     this.setState({
-      salary_edit: this.salary,
-      federaltax_edit: this.federaltax,
-      statetax_edit: this.statetax,
-      sideincome_edit: this.sideincome,
-      rent_edit: this.rent,
-      mortgage_edit: this.mortgage,
-      car_edit: this.car,
-      gas_edit: this.gas,
-      water_edit: this.water,
-      healthcare_edit: this.healthcare,
-      school_edit: this.school,
-      food_edit: this.food,
-      restaurants_edit: this.restaurants,
-      clothes_edit: this.clothes,
-      gym_edit: this.gym,
-      entertainment_edit: this.entertainment,
-      travel_edit: this.travel
+      salary_edit: this.state.salary,
+      federaltax_edit: this.state.federaltax,
+      statetax_edit: this.state.statetax,
+      sideincome_edit: this.state.sideincome,
+      rent_edit: this.state.rent,
+      mortgage_edit: this.state.mortgage,
+      car_edit: this.state.car,
+      gas_edit: this.state.gas,
+      water_edit: this.state.water,
+      healthcare_edit: this.state.healthcare,
+      school_edit: this.state.school,
+      food_edit: this.state.food,
+      restaurants_edit: this.state.restaurants,
+      clothes_edit: this.state.clothes,
+      gym_edit: this.state.gym,
+      entertainment_edit: this.state.entertainment,
+      travel_edit: this.state.travel,
+      open: false
     });
   }
 
   //TODO - handleSubmit() from wizard4
   saveChanges() {
-    console.log(this.props.profile);
+    // console.log(this.props.profile);
     axios
       .put(`/api/incomestatement/${this.props.profile.user.auth_id}`, {
-        salary: this.salary,
-        federaltax: this.federaltax,
-        statetax: this.statetax,
-        sideincome: this.sideincome,
-        rent: this.rent,
-        mortgage: this.mortgage,
-        car: this.car,
-        gas: this.gas,
-        water: this.water,
-        healthcare: this.healthcare,
-        school: this.school,
-        food: this.food,
-        restaurants: this.restaurants,
-        clothes: this.clothes,
-        gym: this.gym,
-        entertainment: this.entertainment,
-        travel: this.travel,
+        salary: this.state.salary,
+        federaltax: this.state.federaltax,
+        statetax: this.state.statetax,
+        sideincome: this.state.sideincome,
+        rent: this.state.rent,
+        mortgage: this.state.mortgage,
+        car: this.state.car,
+        gas: this.state.gas,
+        water: this.state.water,
+        healthcare: this.state.healthcare,
+        school: this.state.school,
+        food: this.state.food,
+        restaurants: this.state.restaurants,
+        clothes: this.state.clothes,
+        gym: this.state.gym,
+        entertainment: this.state.entertainment,
+        travel: this.state.travel,
         monthlyexpenses:
           // monthlyexpenses: all expenses added up
           +(
-            this.rent * 1 +
-            this.mortgage * 1 +
-            this.car * 1 +
-            this.gas * 1 +
-            this.water * 1 +
-            this.healthcare * 1 +
-            this.school * 1 +
-            this.food * 1 +
-            this.restaurants * 1 +
-            this.clothes * 1 +
-            this.gym * 1 +
-            this.entertainment * 1 +
-            this.travel * 1
+            this.state.rent * 1 +
+            this.state.mortgage * 1 +
+            this.state.car * 1 +
+            this.state.gas * 1 +
+            this.state.water * 1 +
+            this.state.healthcare * 1 +
+            this.state.school * 1 +
+            this.state.food * 1 +
+            this.state.restaurants * 1 +
+            this.state.clothes * 1 +
+            this.state.gym * 1 +
+            this.state.entertainment * 1 +
+            this.state.travel * 1
           ),
         monthlyincome:
           // monthlyincome: salary-governmentfees+sideincome
           +(
-            this.salary * 1 -
-            this.salary * (this.federaltax / 100) -
-            this.salary * (this.statetax / 100) -
-            this.salary * 0.0765 +
-            this.sideincome * 1
+            this.state.salary * 1 -
+            this.state.salary * (this.state.federaltax / 100) -
+            this.state.salary * (this.state.statetax / 100) -
+            this.state.salary * 0.0765 +
+            this.state.sideincome * 1
           ),
         monthlynetincome:
           // monthlynetincome: monthlyincome - monthlyexpenses
           +(
-            this.salary * 1 -
-            this.salary * (this.federaltax / 100) -
-            this.salary * (this.statetax / 100) -
-            this.salary * 0.0765 +
-            this.sideincome * 1
+            this.state.salary * 1 -
+            this.state.salary * (this.state.federaltax / 100) -
+            this.state.salary * (this.state.statetax / 100) -
+            this.state.salary * 0.0765 +
+            this.state.sideincome * 1
           ) -
           +(
-            this.rent * 1 +
-            this.mortgage * 1 +
-            this.car * 1 +
-            this.gas * 1 +
-            this.water * 1 +
-            this.healthcare * 1 +
-            this.school * 1 +
-            this.food * 1 +
-            this.restaurants * 1 +
-            this.clothes * 1 +
-            this.gym * 1 +
-            this.entertainment * 1 +
-            this.travel * 1
+            this.state.rent * 1 +
+            this.state.mortgage * 1 +
+            this.state.car * 1 +
+            this.state.gas * 1 +
+            this.state.water * 1 +
+            this.state.healthcare * 1 +
+            this.state.school * 1 +
+            this.state.food * 1 +
+            this.state.restaurants * 1 +
+            this.state.clothes * 1 +
+            this.state.gym * 1 +
+            this.state.entertainment * 1 +
+            this.state.travel * 1
           ),
         monthlynetpercent:
           //monthlynetpercent: monthlynetincome / monthlyincome
           (+(
-            this.salary * 1 -
-            this.salary * (this.federaltax / 100) -
-            this.salary * (this.statetax / 100) -
-            this.salary * 0.0765 +
-            this.sideincome * 1
+            this.state.salary * 1 -
+            this.state.salary * (this.state.federaltax / 100) -
+            this.state.salary * (this.state.statetax / 100) -
+            this.state.salary * 0.0765 +
+            this.state.sideincome * 1
           ) -
             +(
-              this.rent * 1 +
-              this.mortgage * 1 +
-              this.car * 1 +
-              this.gas * 1 +
-              this.water * 1 +
-              this.healthcare * 1 +
-              this.school * 1 +
-              this.food * 1 +
-              this.restaurants * 1 +
-              this.clothes * 1 +
-              this.gym * 1 +
-              this.entertainment * 1 +
-              this.travel * 1
+              this.state.rent * 1 +
+              this.state.mortgage * 1 +
+              this.state.car * 1 +
+              this.state.gas * 1 +
+              this.state.water * 1 +
+              this.state.healthcare * 1 +
+              this.state.school * 1 +
+              this.state.food * 1 +
+              this.state.restaurants * 1 +
+              this.state.clothes * 1 +
+              this.state.gym * 1 +
+              this.state.entertainment * 1 +
+              this.state.travel * 1
             )) /
           +(
-            this.salary * 1 -
-            this.salary * (this.federaltax / 100) -
-            this.salary * (this.statetax / 100) -
-            this.salary * 0.0765 +
-            this.sideincome * 1
+            this.state.salary * 1 -
+            this.state.salary * (this.state.federaltax / 100) -
+            this.state.salary * (this.state.statetax / 100) -
+            this.state.salary * 0.0765 +
+            this.state.sideincome * 1
           )
       })
       .then(response => {
@@ -368,11 +327,13 @@ class IncomeStatement extends Component {
           monthlyexpenses: response.data[0].monthlyexpenses,
           monthlyincome: response.data[0].monthlyincome,
           monthlynetincome: response.data[0].monthlynetincome,
-          monthlynetpercent: response.data[0].monthlynetpercent
+          monthlynetpercent: response.data[0].monthlynetpercent,
+          open: false
         });
       });
   }
 
+  // NodeMailer
   sendIncomeStatement() {
     axios
       .post(`/api/sendIncomeStatement/${this.props.profile.user.auth_id}`, {
@@ -503,10 +464,9 @@ class IncomeStatement extends Component {
               <button
                 style={{ marginTop: "30px" }}
                 className="addcardbtn"
-                //add onClick to a model update.
                 onClick={() => this.handleOpen()}
               >
-                Update
+                UPDATE
               </button>
               <Modal
                 aria-labelledby="simple-modal-title"
@@ -515,29 +475,22 @@ class IncomeStatement extends Component {
                 onClose={this.handleClose}
               >
                 <div className={classes.paper}>
-                  <Typography variant="h6" id="modal-title">
-                    Update your income statement
-                  </Typography>
-                  {/* don't need */}
-                  {/* <Typography variant="subtitle1" id="simple-modal-description">
-                    Duis mollis, est non commodo luctus, nisi erat porttitor
-                    ligula.
-                  </Typography> */}
-                  {/* <SimpleModalWrapped /> */}
-                  {/* -------- */}
-                  {/* Use Material UI Text Fields for Update */}
-                  {/* TODO - Update form */}
+                  <div style={{ color: "indigo", textAlign: "center" }}>
+                    <h2>Update Income Statement</h2>
+                  </div>
+
+                  {/* Update form */}
                   <form
                     className={classes.container}
                     noValidate
                     autoComplete="off"
                   >
-                    {/* Keep Number */}
+                    {/* Salary - edit */}
                     <TextField
                       id="filled-number"
-                      label="Number"
-                      value={this.state.age}
-                      onChange={this.handleChange("age")}
+                      label="Monthly Wage"
+                      value={this.state.salary}
+                      onChange={this.handleChange("salary")}
                       type="number"
                       className={classes.textField}
                       InputLabelProps={{
@@ -547,67 +500,263 @@ class IncomeStatement extends Component {
                       variant="filled"
                     />
 
-                    {/* Keep Select */}
+                    {/* Federal Tax - edit */}
                     <TextField
-                      id="filled-select-currency"
-                      select
-                      label="Select"
+                      id="filled-number"
+                      label="Federal Tax (%)"
+                      value={this.state.federaltax}
+                      onChange={this.handleChange("federaltax")}
+                      type="number"
                       className={classes.textField}
-                      value={this.state.currency}
-                      onChange={this.handleChange("currency")}
-                      SelectProps={{
-                        MenuProps: {
-                          className: classes.menu
-                        }
+                      InputLabelProps={{
+                        shrink: true
                       }}
-                      helperText="Please select your currency"
+                      helperText="Number taken as percentage"
                       margin="normal"
                       variant="filled"
-                    >
-                      {currencies.map(option => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                    </TextField>
+                    />
 
-                    {/* Keep Select */}
+                    {/* State Tax - edit */}
                     <TextField
-                      id="filled-select-currency-native"
-                      select
-                      label="Native select"
+                      id="filled-number"
+                      label="State Tax (%)"
+                      value={this.state.statetax}
+                      onChange={this.handleChange("statetax")}
+                      type="number"
                       className={classes.textField}
-                      value={this.state.currency}
-                      onChange={this.handleChange("currency")}
-                      SelectProps={{
-                        native: true,
-                        MenuProps: {
-                          className: classes.menu
-                        }
+                      InputLabelProps={{
+                        shrink: true
                       }}
-                      helperText="Please select your currency"
+                      helperText="Number taken as percentage"
                       margin="normal"
                       variant="filled"
-                    >
-                      {currencies.map(option => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </TextField>
+                    />
 
+                    {/* Side Income - edit */}
                     <TextField
-                      id="filled-bare"
+                      id="filled-number"
+                      label="Side Income"
+                      value={this.state.sideincome}
+                      onChange={this.handleChange("sideincome")}
+                      type="number"
                       className={classes.textField}
-                      defaultValue="Bare"
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      margin="normal"
+                      variant="filled"
+                    />
+
+                    {/* Rent - edit */}
+                    <TextField
+                      id="filled-number"
+                      label="Rent"
+                      value={this.state.rent}
+                      onChange={this.handleChange("rent")}
+                      type="number"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      margin="normal"
+                      variant="filled"
+                    />
+
+                    {/* Mortgage - edit */}
+                    <TextField
+                      id="filled-number"
+                      label="Mortgage"
+                      value={this.state.mortgage}
+                      onChange={this.handleChange("mortgage")}
+                      type="number"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      margin="normal"
+                      variant="filled"
+                    />
+
+                    {/* Car - edit */}
+                    <TextField
+                      id="filled-number"
+                      label="Car"
+                      value={this.state.car}
+                      onChange={this.handleChange("car")}
+                      type="number"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      margin="normal"
+                      variant="filled"
+                    />
+
+                    {/* Gas - edit */}
+                    <TextField
+                      id="filled-number"
+                      label="Gas"
+                      value={this.state.gas}
+                      onChange={this.handleChange("gas")}
+                      type="number"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      margin="normal"
+                      variant="filled"
+                    />
+
+                    {/* Water - edit */}
+                    <TextField
+                      id="filled-number"
+                      label="Water"
+                      value={this.state.water}
+                      onChange={this.handleChange("water")}
+                      type="number"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      margin="normal"
+                      variant="filled"
+                    />
+
+                    {/* Healthcare - edit */}
+                    <TextField
+                      id="filled-number"
+                      label="Healthcare"
+                      value={this.state.healthcare}
+                      onChange={this.handleChange("healthcare")}
+                      type="number"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      margin="normal"
+                      variant="filled"
+                    />
+
+                    {/* School - edit */}
+                    <TextField
+                      id="filled-number"
+                      label="School"
+                      value={this.state.school}
+                      onChange={this.handleChange("school")}
+                      type="number"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      margin="normal"
+                      variant="filled"
+                    />
+
+                    {/* Food - edit */}
+                    <TextField
+                      id="filled-number"
+                      label="Food"
+                      value={this.state.food}
+                      onChange={this.handleChange("food")}
+                      type="number"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      margin="normal"
+                      variant="filled"
+                    />
+
+                    {/* Restaurants - edit */}
+                    <TextField
+                      id="filled-number"
+                      label="Restaurants"
+                      value={this.state.restaurants}
+                      onChange={this.handleChange("restaurants")}
+                      type="number"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      margin="normal"
+                      variant="filled"
+                    />
+
+                    {/* Clothes - edit */}
+                    <TextField
+                      id="filled-number"
+                      label="Clothes"
+                      value={this.state.clothes}
+                      onChange={this.handleChange("clothes")}
+                      type="number"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      margin="normal"
+                      variant="filled"
+                    />
+
+                    {/* Gym - edit */}
+                    <TextField
+                      id="filled-number"
+                      label="Gym"
+                      value={this.state.gym}
+                      onChange={this.handleChange("gym")}
+                      type="number"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      margin="normal"
+                      variant="filled"
+                    />
+
+                    {/* Entertainment - edit */}
+                    <TextField
+                      id="filled-number"
+                      label="Entertainment"
+                      value={this.state.entertainment}
+                      onChange={this.handleChange("entertainment")}
+                      type="number"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      margin="normal"
+                      variant="filled"
+                    />
+
+                    {/* Travel - edit */}
+                    <TextField
+                      id="filled-number"
+                      label="Travel"
+                      value={this.state.travel}
+                      onChange={this.handleChange("travel")}
+                      type="number"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
                       margin="normal"
                       variant="filled"
                     />
                   </form>
-                  <Button onClick={() => this.cancelChanges()}>Cancel</Button>
-                  <Button onClick={() => this.saveChanges()}>
-                    Submit Changes
-                  </Button>
+
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Button
+                      style={{ backgroundColor: "red", color: "white" }}
+                      onClick={() => this.cancelChanges()}
+                    >
+                      <strong> Cancel</strong>
+                    </Button>
+                    <Button
+                      style={{ backgroundColor: "indigo", color: "white" }}
+                      onClick={() => this.saveChanges()}
+                    >
+                      <strong>Submit</strong>
+                    </Button>
+                  </div>
                 </div>
               </Modal>
             </span>
@@ -615,7 +764,7 @@ class IncomeStatement extends Component {
             <div className="spreadsheet">
               <div style={{ fontSize: 18, marginLeft: 100 }}>INCOME</div>
               <div>
-                Salary:
+                Monthly Wage:
                 <p>{this.state.salary}</p>
               </div>
               <div>
