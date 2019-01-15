@@ -76,8 +76,8 @@ class DesiredPurchaseEdit extends Component {
       <div className="parent-divv">
         <div className="vert-alignn">
           <div>
-            <h3>Purchase Card Edit Page</h3>
-            <h4>Editing Card: {this.state.itemname}</h4>
+            {/* Purchase Card Edit Page */}
+            <h3>Editing Card: {this.state.itemname}</h3>
           </div>
           <div>
             <span className="input-row">

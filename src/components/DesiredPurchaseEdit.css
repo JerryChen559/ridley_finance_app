@@ -1,20 +1,14 @@
-/* TODO: note: take pic out. make background green*/
-/* TODO: note: put pic in about page*/
-
 .parent-divv {
-  /* remove when done */
-  /* border: 1px blueviolet dotted; */
   background-color: bisque;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 95vh;
+  height: 100vh;
   width: 100%;
   font-family: Roboto, sans-serif;
 }
 
 .vert-alignn {
-  /* border: 3px solid green; */
   height: 400px;
   width: 70%;
   margin-left: 15%;
@@ -36,6 +30,7 @@
 }
 
 .input-row p {
+  font-size: 16px;
   width: 40%;
   padding-top: 10px;
 }
