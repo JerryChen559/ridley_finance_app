@@ -745,13 +745,21 @@ class IncomeStatement extends Component {
 
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     <Button
-                      style={{ backgroundColor: "red", color: "white" }}
+                      style={{
+                        backgroundColor: "red",
+                        color: "white",
+                        marginRight: "10px"
+                      }}
                       onClick={() => this.cancelChanges()}
                     >
                       <strong> Cancel</strong>
                     </Button>
                     <Button
-                      style={{ backgroundColor: "indigo", color: "white" }}
+                      style={{
+                        backgroundColor: "indigo",
+                        color: "white",
+                        marginLeft: "10px"
+                      }}
                       onClick={() => this.saveChanges()}
                     >
                       <strong>Submit</strong>
