@@ -200,7 +200,6 @@ class IncomeStatement extends Component {
     });
   }
 
-  //TODO - handleSubmit() from wizard4
   saveChanges() {
     // console.log(this.props.profile);
     axios

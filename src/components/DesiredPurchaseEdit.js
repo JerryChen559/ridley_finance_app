@@ -65,8 +65,8 @@ class DesiredPurchaseEdit extends Component {
   }
 
   render() {
-    console.log("editcard state:", this.state);
-    console.log("editcard props:", this.props);
+    // console.log("editcard state:", this.state);
+    // console.log("editcard props:", this.props);
 
     if (this.state.redirect) {
       return <Redirect to="/desiredpurchases" />;
